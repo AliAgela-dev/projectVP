@@ -16,7 +16,8 @@ employee_dob date ,
 );
 
 create table departments(
-dp_name varchar(50) primary key ,
+id  int  identity(1,1) primary key ,
+dp_name varchar(50),
 );
 
 
@@ -27,4 +28,4 @@ inser into departments values('R&D');
 inser into departments values('tec-support');
 
 
-#just make sure to change the name of the sql server in sql connection in the shared functions 
+##just make sure to change the name of the sql server in sql connection in the shared functions 
