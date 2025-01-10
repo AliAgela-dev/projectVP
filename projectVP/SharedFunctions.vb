@@ -48,6 +48,22 @@ Public Class SharedFunctions
         DataGridViewXYZ.DataSource = dtb
 
     End Sub
+    Function isLogedIn(ByVal sql) As Boolean
+        If db.State = ConnectionState.Open Then db.Close()
+        If db.State = ConnectionState.Closed Then db.Open()
 
+        Dim user As New SqlDataAdapter(sql, db)
+        Dim ds As New DataSet
+
+        user.Fill(ds, sql)
+        Dim users As New DataTable
+
+        users = ds.Tables(sql)
+        If users.Rows.Count = 1 Then
+            Return True
+
+        End If
+        Return False
+    End Function
 
 End Class

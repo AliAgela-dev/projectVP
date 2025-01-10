@@ -22,7 +22,10 @@ Partial Class main_form
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(main_form))
         GB1 = New GroupBox()
+        add_pic_btn = New Button()
+        profilePic = New PictureBox()
         dob_txt = New DateTimePicker()
         dp_txt = New ComboBox()
         nat_lbl = New Label()
@@ -43,13 +46,17 @@ Partial Class main_form
         employee_ssn = New DataGridViewTextBoxColumn()
         employee_dob = New DataGridViewTextBoxColumn()
         employee_dp = New DataGridViewTextBoxColumn()
+        profile_img = New DataGridViewTextBoxColumn()
         GB1.SuspendLayout()
+        CType(profilePic, ComponentModel.ISupportInitialize).BeginInit()
         CType(emp_data_grid_view, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' GB1
         ' 
         GB1.Anchor = AnchorStyles.None
+        GB1.Controls.Add(add_pic_btn)
+        GB1.Controls.Add(profilePic)
         GB1.Controls.Add(dob_txt)
         GB1.Controls.Add(dp_txt)
         GB1.Controls.Add(nat_lbl)
@@ -65,6 +72,24 @@ Partial Class main_form
         GB1.TabIndex = 0
         GB1.TabStop = False
         GB1.Text = "منظومة الطلبة "
+        ' 
+        ' add_pic_btn
+        ' 
+        add_pic_btn.Location = New Point(30, 230)
+        add_pic_btn.Name = "add_pic_btn"
+        add_pic_btn.Size = New Size(205, 54)
+        add_pic_btn.TabIndex = 19
+        add_pic_btn.Text = "تحديد الصورة"
+        add_pic_btn.UseVisualStyleBackColor = True
+        ' 
+        ' profilePic
+        ' 
+        profilePic.Image = CType(resources.GetObject("profilePic.Image"), Image)
+        profilePic.Location = New Point(30, 17)
+        profilePic.Name = "profilePic"
+        profilePic.Size = New Size(205, 207)
+        profilePic.TabIndex = 19
+        profilePic.TabStop = False
         ' 
         ' dob_txt
         ' 
@@ -167,7 +192,7 @@ Partial Class main_form
         ' 
         emp_data_grid_view.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         emp_data_grid_view.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        emp_data_grid_view.Columns.AddRange(New DataGridViewColumn() {id, employee_name, employee_ssn, employee_dob, employee_dp})
+        emp_data_grid_view.Columns.AddRange(New DataGridViewColumn() {id, employee_name, employee_ssn, employee_dob, employee_dp, profile_img})
         emp_data_grid_view.Location = New Point(12, 447)
         emp_data_grid_view.Name = "emp_data_grid_view"
         emp_data_grid_view.RowHeadersWidth = 51
@@ -223,9 +248,17 @@ Partial Class main_form
         employee_dp.MinimumWidth = 6
         employee_dp.Name = "employee_dp"
         ' 
+        ' profile_img
+        ' 
+        profile_img.DataPropertyName = "profile_img"
+        profile_img.HeaderText = "profile_img"
+        profile_img.MinimumWidth = 6
+        profile_img.Name = "profile_img"
+        profile_img.Visible = False
+        ' 
         ' main_form
         ' 
-        AutoScaleDimensions = New SizeF(11F, 22F)
+        AutoScaleDimensions = New SizeF(11.0F, 22.0F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1282, 753)
         Controls.Add(id_txt)
@@ -235,7 +268,7 @@ Partial Class main_form
         Controls.Add(delete_btn)
         Controls.Add(GB1)
         Controls.Add(add_btn)
-        Font = New Font("Times New Roman", 12F)
+        Font = New Font("Times New Roman", 12.0F)
         Margin = New Padding(4)
         Name = "main_form"
         RightToLeftLayout = True
@@ -243,6 +276,7 @@ Partial Class main_form
         Text = "mainForm"
         GB1.ResumeLayout(False)
         GB1.PerformLayout()
+        CType(profilePic, ComponentModel.ISupportInitialize).EndInit()
         CType(emp_data_grid_view, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
@@ -270,11 +304,14 @@ Partial Class main_form
     Friend WithEvents emp_data_grid_view As DataGridView
     Friend WithEvents search_txt As TextBox
     Friend WithEvents id_txt As TextBox
+    Friend WithEvents add_pic_btn As Button
+    Friend WithEvents profilePic As PictureBox
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents employee_name As DataGridViewTextBoxColumn
     Friend WithEvents employee_ssn As DataGridViewTextBoxColumn
     Friend WithEvents employee_dob As DataGridViewTextBoxColumn
     Friend WithEvents employee_dp As DataGridViewTextBoxColumn
+    Friend WithEvents profile_img As DataGridViewTextBoxColumn
 
 
 End Class
