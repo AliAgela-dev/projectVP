@@ -24,7 +24,16 @@ Public Class main_form
         obj.displayOnDataGrid("select * from employee  ", emp_data_grid_view)
     End Sub
     Private Sub Main_frm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Me.Text = user_name
+        If user_role = "admin" Then
+            add_btn.Enabled = True
+            edit_btn.Enabled = True
+            delete_btn.Enabled = True
+        Else
+            add_btn.Enabled = False
+            edit_btn.Enabled = False
+            delete_btn.Enabled = False
+        End If
         obj.FillList(dp_txt, "departments", "dp_name", "id")
         obj.displayOnDataGrid("select * from employee  ", emp_data_grid_view)
 

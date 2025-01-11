@@ -7,6 +7,12 @@
         sql = "select * from users where user_name = N'" & UsernameTextBox.Text & "'and password = N'" & PasswordTextBox.Text & "'"
 
         If obj.isLogedIn(sql) Then
+            sql = "select * from users where user_name = N'" & UsernameTextBox.Text & "'and level = N'admin'"
+            If obj.isLogedIn(sql) Then
+                user_role = "admin"
+            Else
+                user_role = "user"
+            End If
             main_form.Show()
             Me.Hide()
         Else

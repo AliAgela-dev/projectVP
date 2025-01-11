@@ -39,14 +39,14 @@ Partial Class main_form
         edit_btn = New Button()
         OpenFileDialog1 = New OpenFileDialog()
         emp_data_grid_view = New DataGridView()
-        search_txt = New TextBox()
-        id_txt = New TextBox()
         id = New DataGridViewTextBoxColumn()
         employee_name = New DataGridViewTextBoxColumn()
         employee_ssn = New DataGridViewTextBoxColumn()
         employee_dob = New DataGridViewTextBoxColumn()
         employee_dp = New DataGridViewTextBoxColumn()
         profile_img = New DataGridViewTextBoxColumn()
+        search_txt = New TextBox()
+        id_txt = New TextBox()
         GB1.SuspendLayout()
         CType(profilePic, ComponentModel.ISupportInitialize).BeginInit()
         CType(emp_data_grid_view, ComponentModel.ISupportInitialize).BeginInit()
@@ -199,20 +199,6 @@ Partial Class main_form
         emp_data_grid_view.Size = New Size(1258, 188)
         emp_data_grid_view.TabIndex = 18
         ' 
-        ' search_txt
-        ' 
-        search_txt.Location = New Point(906, 398)
-        search_txt.Name = "search_txt"
-        search_txt.Size = New Size(340, 30)
-        search_txt.TabIndex = 18
-        ' 
-        ' id_txt
-        ' 
-        id_txt.Location = New Point(431, 397)
-        id_txt.Name = "id_txt"
-        id_txt.Size = New Size(65, 30)
-        id_txt.TabIndex = 18
-        ' 
         ' id
         ' 
         id.DataPropertyName = "id"
@@ -256,9 +242,23 @@ Partial Class main_form
         profile_img.Name = "profile_img"
         profile_img.Visible = False
         ' 
+        ' search_txt
+        ' 
+        search_txt.Location = New Point(906, 398)
+        search_txt.Name = "search_txt"
+        search_txt.Size = New Size(340, 30)
+        search_txt.TabIndex = 18
+        ' 
+        ' id_txt
+        ' 
+        id_txt.Location = New Point(431, 397)
+        id_txt.Name = "id_txt"
+        id_txt.Size = New Size(65, 30)
+        id_txt.TabIndex = 18
+        ' 
         ' main_form
         ' 
-        AutoScaleDimensions = New SizeF(11.0F, 22.0F)
+        AutoScaleDimensions = New SizeF(11F, 22F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1282, 753)
         Controls.Add(id_txt)
@@ -268,7 +268,7 @@ Partial Class main_form
         Controls.Add(delete_btn)
         Controls.Add(GB1)
         Controls.Add(add_btn)
-        Font = New Font("Times New Roman", 12.0F)
+        Font = New Font("Times New Roman", 12F)
         Margin = New Padding(4)
         Name = "main_form"
         RightToLeftLayout = True
