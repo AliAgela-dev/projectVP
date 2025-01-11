@@ -2,7 +2,7 @@
 Imports System.Reflection
 
 Public Class SharedFunctions
-    Public db As New SqlConnection("Server=LAPTOP-RCJITDS4\SQLEXPRESS;Database=examvp; Trusted_Connection=True;")
+    Public db As New SqlConnection("Server=LAPTOP-RCJITDS4\SQLEXPRESS;Database=warehouse; Trusted_Connection=True;")
 
     Public Function FillList(ByVal comboboxZ As ComboBox,
     ByVal tableName As String, ByVal name As String,

@@ -3,64 +3,83 @@ Imports projectVP.SharedFunctions
 Public Class main_form
 
     Public obj As New SharedFunctions
+    Dim data As String = "select p.product_id,p.product_number,p.description as product_description,p.quantity,p.date_of_last_shipment,c.description as country_description,cat.description as category_description,p.product_picture from product p inner join country c on p.country_of_origin = c.country_id inner join  category cat on p.category = cat.category_id;"
 
     Public Sub add_btn_Click(sender As Object, e As EventArgs) Handles add_btn.Click
-
-        Dim ssn As String = emp_ssn.Text
-
-        ' Validate fields
-        If String.IsNullOrWhiteSpace(name_txt.Text) OrElse String.IsNullOrWhiteSpace(ssn) OrElse String.IsNullOrWhiteSpace(dob_txt.Text) OrElse String.IsNullOrWhiteSpace(dp_txt.Text) Then
-            MsgBox("Please fill in all fields.", MsgBoxStyle.Critical, "Validation Error")
+        ' Validate that all fields are filled
+        If String.IsNullOrWhiteSpace(id_txt.Text) OrElse String.IsNullOrWhiteSpace(des_txt.Text) OrElse String.IsNullOrWhiteSpace(qun_txt.Text) OrElse String.IsNullOrWhiteSpace(dos_txt.Text) OrElse co_txt.SelectedValue Is Nothing OrElse ca_txt.SelectedValue Is Nothing Then
+            MsgBox("الرجاء ملء جميع الحقول.")
             Return
         End If
 
-        ' Validate SSN length
-        If ssn.Length <> 12 Then
-            MsgBox("Employee SSN must be 12 digits.", MsgBoxStyle.Critical, "Validation Error")
+        ' Validate that id_txt is an integer
+        Dim productId As Integer
+        If Not Integer.TryParse(id_txt.Text, productId) Then
+            MsgBox("الرجاء إدخال رقم صحيح في حقل رقم الصنف .")
+            Return
+        End If
+        Dim qun As Integer
+        If Not Integer.TryParse(qun_txt.Text, qun) Then
+            MsgBox("الرجاء إدخال رقم صحيح في حقل الكمية.")
             Return
         End If
 
-        obj.DbOpreation("insert into employee ( employee_name,employee_ssn,employee_dob,employee_dp,profile_img) values('" & name_txt.Text & "','" & ssn & "','" & dob_txt.Text & "','" & dp_txt.Text & "' " & ",'" & profilePic.ImageLocation & "')")
-        obj.displayOnDataGrid("select * from employee  ", emp_data_grid_view)
+        Dim sql As String = "select product_number from product where product_number = " & productId
+
+        If obj.isLogedIn(sql) Then
+            MsgBox("هذا المنتج متواجد من قبل")
+            Return
+        End If
+        obj.DbOpreation("insert into product ( product_number,description,quantity,date_of_last_shipment,country_of_origin,category,product_picture) values(" & productId & ",N'" & des_txt.Text & "'," & qun_txt.Text & ",'" & dos_txt.Text & "'," & co_txt.SelectedValue & "," & ca_txt.SelectedValue & ",'" & productpic.ImageLocation & "')")
+        obj.displayOnDataGrid(data, emp_data_grid_view)
     End Sub
     Private Sub Main_frm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = user_name
         If user_role = "admin" Then
-            add_btn.Enabled = True
-            edit_btn.Enabled = True
+
             delete_btn.Enabled = True
         Else
-            add_btn.Enabled = False
-            edit_btn.Enabled = False
+
             delete_btn.Enabled = False
         End If
-        obj.FillList(dp_txt, "departments", "dp_name", "id")
-        obj.displayOnDataGrid("select * from employee  ", emp_data_grid_view)
+        obj.FillList(co_txt, "country", "description", "country_id")
+        obj.FillList(ca_txt, "category", "description", "category_id")
+        obj.displayOnDataGrid(data, emp_data_grid_view)
 
 
     End Sub
 
     Public Sub delete_btn_Click(sender As Object, e As EventArgs) Handles delete_btn.Click
-        Dim stNo As String = emp_ssn.Text
-        obj.DbOpreation("delete from employee where  id = " & id_txt.Text)
-        obj.displayOnDataGrid("select * from employee  ", emp_data_grid_view)
+        ' Validate that id_txt is an integer
+        Dim productId As Integer
+        If Not Integer.TryParse(id_txt.Text, productId) Then
+            MsgBox("الرجاء إدخال رقم صحيح في حقل رقم الصنف .")
+            Return
+        End If
+        obj.DbOpreation("delete from product where  product_number = " & id_txt.Text)
+        obj.displayOnDataGrid(data, emp_data_grid_view)
 
     End Sub
     Private Sub edit_btn_Click(sender As Object, e As EventArgs) Handles edit_btn.Click
-        Dim ssn As String = emp_ssn.Text
-        ' Validate fields
-        If String.IsNullOrWhiteSpace(name_txt.Text) OrElse String.IsNullOrWhiteSpace(ssn) OrElse String.IsNullOrWhiteSpace(dob_txt.Text) OrElse String.IsNullOrWhiteSpace(dp_txt.Text) Then
-            MsgBox("Please fill in all fields.", MsgBoxStyle.Critical, "Validation Error")
+        ' Validate that all fields are filled
+        If String.IsNullOrWhiteSpace(id_txt.Text) OrElse String.IsNullOrWhiteSpace(des_txt.Text) OrElse String.IsNullOrWhiteSpace(qun_txt.Text) OrElse String.IsNullOrWhiteSpace(dos_txt.Text) OrElse co_txt.SelectedValue Is Nothing OrElse ca_txt.SelectedValue Is Nothing Then
+            MsgBox("الرجاء ملء جميع الحقول.")
             Return
         End If
 
-        ' Validate SSN length
-        If ssn.Length <> 12 Then
-            MsgBox("Employee SSN must be 12 digits.", MsgBoxStyle.Critical, "Validation Error")
+        ' Validate that id_txt is an integer
+        Dim productId As Integer
+        If Not Integer.TryParse(id_txt.Text, productId) Then
+            MsgBox("الرجاء إدخال رقم صحيح في حقل رقم الصنف .")
             Return
         End If
-        obj.DbOpreation("UPDATE employee SET employee_name = '" & name_txt.Text & "', employee_ssn = '" & emp_ssn.Text & "', employee_dob = '" & dob_txt.Text & "', employee_dp = '" & dp_txt.Text & "', profile_img = '" & profilePic.ImageLocation & "' WHERE id = " & id_txt.Text)
-        obj.displayOnDataGrid("select * from employee  ", emp_data_grid_view)
+        Dim qun As Integer
+        If Not Integer.TryParse(qun_txt.Text, qun) Then
+            MsgBox("الرجاء إدخال رقم صحيح في حقل الكمية.")
+            Return
+        End If
+        obj.DbOpreation("UPDATE product Set description = N'" & des_txt.Text & "', product_number = " & id_txt.Text & ", date_of_last_shipment = '" & dos_txt.Text & "', quantity = " & qun_txt.Text & ", country_of_origin = " & co_txt.SelectedValue & ", category = " & ca_txt.SelectedValue & ",product_picture ='" & productpic.ImageLocation & "' WHERE product_number = " & id_txt.Text)
+        obj.displayOnDataGrid(data, emp_data_grid_view)
     End Sub
 
     Private Sub pic_btn_Click(sender As Object, e As EventArgs)
@@ -88,23 +107,33 @@ Public Class main_form
     End Sub
 
     Private Sub search_txt_TextChanged(sender As Object, e As EventArgs) Handles search_txt.TextChanged
-        obj.displayOnDataGrid("select * from employee where employee_name like '%" & search_txt.Text & "%'", emp_data_grid_view)
+        Dim searchsql As String = "select  p.product_id, p.product_number, p.description as product_description, p.quantity, p.date_of_last_shipment, c.description as country_description, cat.description as category_description, p.product_picture from  product p inner join  country c on p.country_of_origin = c.country_id inner join  category cat on p.category = cat.category_id where  p.description like N'%" & search_txt.Text & "%'  or p.product_number like N'%" & search_txt.Text & "%' "
+        obj.displayOnDataGrid(searchsql, emp_data_grid_view)
     End Sub
 
     Private Sub student_data_grid_view_KeyDown(sender As Object, e As KeyEventArgs) Handles emp_data_grid_view.KeyDown
-        ' Check if the current row is not null before accessing its cells
-        If emp_data_grid_view.CurrentRow IsNot DBNull.Value Then
-            id_txt.Text = emp_data_grid_view.CurrentRow.Cells(0).Value
-            name_txt.Text = emp_data_grid_view.CurrentRow.Cells(1).Value
-            emp_ssn.Text = emp_data_grid_view.CurrentRow.Cells(2).Value
-            dob_txt.Text = emp_data_grid_view.CurrentRow.Cells(3).Value
-            dp_txt.Text = emp_data_grid_view.CurrentRow.Cells(4).Value
-            ' Check if cell 5 is not null before assigning to profilePic.ImageLocation
-            If emp_data_grid_view.CurrentRow.Cells(5).Value IsNot DBNull.Value Then
-                profilePic.ImageLocation = emp_data_grid_view.CurrentRow.Cells(5).Value
-            Else
-                profilePic.ImageLocation = String.Empty ' or set a default image
+        If e.KeyCode = Keys.Enter Then
+            ' Check if the current row is not null before accessing its cells
+            If emp_data_grid_view.CurrentRow.Index = emp_data_grid_view.Rows.Count - 1 Then
+                ' Move to the first row
+                emp_data_grid_view.CurrentCell = emp_data_grid_view.Rows(0).Cells(0)
             End If
+            If emp_data_grid_view.CurrentRow IsNot DBNull.Value Then
+                id_txt.Text = emp_data_grid_view.CurrentRow.Cells(1).Value
+                des_txt.Text = emp_data_grid_view.CurrentRow.Cells(2).Value
+                qun_txt.Text = emp_data_grid_view.CurrentRow.Cells(3).Value
+                dos_txt.Text = emp_data_grid_view.CurrentRow.Cells(4).Value
+                co_txt.Text = emp_data_grid_view.CurrentRow.Cells(5).Value
+                ca_txt.Text = emp_data_grid_view.CurrentRow.Cells(6).Value
+                ' Check if cell 5 is not null before assigning to productpic.ImageLocation
+                If emp_data_grid_view.CurrentRow.Cells(5).Value IsNot DBNull.Value Then
+                    productpic.ImageLocation = emp_data_grid_view.CurrentRow.Cells(7).Value
+                Else
+                    productpic.ImageLocation = String.Empty ' or set a default image
+                End If
+            End If
+
+
         End If
     End Sub
 
@@ -121,12 +150,12 @@ Public Class main_form
         'displays the image path for the user in the GUI
 
         'Changing user picture
-        profilePic.ImageLocation = img_path
+        productpic.ImageLocation = img_path
 
         ' Only PNG or JPG or JPEG
         If img_path.Contains(".png") Or img_path.Contains(".jpg") Or img_path.Contains(".jpeg") Then
 
-            profilePic.Load(img_path)
+            productpic.Load(img_path)
         Else
             MsgBox("الرجاء اختيار صورة نوع PNG أو JPG !", MsgBoxStyle.Critical, "منظومة شؤون الطلبة")
         End If

@@ -44,7 +44,7 @@ Partial Class LoginForm1
         ' LogoPictureBox
         ' 
         LogoPictureBox.Image = CType(resources.GetObject("LogoPictureBox.Image"), Image)
-        LogoPictureBox.Location = New Point(0, 0)
+        LogoPictureBox.Location = New Point(507, 29)
         LogoPictureBox.Name = "LogoPictureBox"
         LogoPictureBox.Size = New Size(165, 193)
         LogoPictureBox.TabIndex = 0
@@ -52,53 +52,53 @@ Partial Class LoginForm1
         ' 
         ' UsernameLabel
         ' 
-        UsernameLabel.Location = New Point(172, 24)
+        UsernameLabel.Location = New Point(332, 49)
         UsernameLabel.Name = "UsernameLabel"
-        UsernameLabel.Size = New Size(220, 23)
+        UsernameLabel.Size = New Size(106, 23)
         UsernameLabel.TabIndex = 0
-        UsernameLabel.Text = "&User name"
+        UsernameLabel.Text = "اسم المستخدم"
         UsernameLabel.TextAlign = ContentAlignment.MiddleLeft
         ' 
         ' PasswordLabel
         ' 
-        PasswordLabel.Location = New Point(172, 81)
+        PasswordLabel.Location = New Point(356, 114)
         PasswordLabel.Name = "PasswordLabel"
-        PasswordLabel.Size = New Size(220, 23)
+        PasswordLabel.Size = New Size(92, 23)
         PasswordLabel.TabIndex = 2
-        PasswordLabel.Text = "&Password"
+        PasswordLabel.Text = "كلمة المرور "
         PasswordLabel.TextAlign = ContentAlignment.MiddleLeft
         ' 
         ' UsernameTextBox
         ' 
-        UsernameTextBox.Location = New Point(174, 44)
+        UsernameTextBox.Location = New Point(100, 75)
         UsernameTextBox.Name = "UsernameTextBox"
-        UsernameTextBox.Size = New Size(220, 27)
+        UsernameTextBox.Size = New Size(338, 27)
         UsernameTextBox.TabIndex = 1
         ' 
         ' PasswordTextBox
         ' 
-        PasswordTextBox.Location = New Point(174, 101)
+        PasswordTextBox.Location = New Point(100, 140)
         PasswordTextBox.Name = "PasswordTextBox"
         PasswordTextBox.PasswordChar = "*"c
-        PasswordTextBox.Size = New Size(220, 27)
+        PasswordTextBox.Size = New Size(338, 27)
         PasswordTextBox.TabIndex = 3
         ' 
         ' OK
         ' 
-        OK.Location = New Point(197, 161)
+        OK.Location = New Point(109, 253)
         OK.Name = "OK"
-        OK.Size = New Size(94, 23)
+        OK.Size = New Size(134, 51)
         OK.TabIndex = 4
-        OK.Text = "&OK"
+        OK.Text = "تسجيل الدخول"
         ' 
         ' Cancel
         ' 
         Cancel.DialogResult = DialogResult.Cancel
-        Cancel.Location = New Point(300, 161)
+        Cancel.Location = New Point(275, 253)
         Cancel.Name = "Cancel"
-        Cancel.Size = New Size(94, 23)
+        Cancel.Size = New Size(136, 51)
         Cancel.TabIndex = 5
-        Cancel.Text = "&Cancel"
+        Cancel.Text = "إلغاء الامر"
         ' 
         ' LoginForm1
         ' 
@@ -106,7 +106,7 @@ Partial Class LoginForm1
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = Cancel
-        ClientSize = New Size(401, 192)
+        ClientSize = New Size(684, 359)
         Controls.Add(Cancel)
         Controls.Add(OK)
         Controls.Add(PasswordTextBox)
@@ -118,9 +118,10 @@ Partial Class LoginForm1
         MaximizeBox = False
         MinimizeBox = False
         Name = "LoginForm1"
+        RightToLeft = RightToLeft.Yes
         SizeGripStyle = SizeGripStyle.Hide
         StartPosition = FormStartPosition.CenterParent
-        Text = "LoginForm1"
+        Text = "نظام إدارة المخازن - تسجيل الدخول"
         CType(LogoPictureBox, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
